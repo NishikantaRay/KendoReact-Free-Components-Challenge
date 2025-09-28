@@ -490,3 +490,15 @@ html {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Sidebar tooltip hover effects */
+button:hover .sidebar-tooltip {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Loading animation for Nuclia widget */
+@keyframes k-loader-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

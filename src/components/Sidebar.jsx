@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '@progress/kendo-react-buttons';
 import { Switch } from '@progress/kendo-react-inputs';
 import { useNavigate, useLocation } from 'react-router-dom';
+import NucliaQueryWidget from './NucliaQueryWidget';
 
 const Sidebar = ({ 
   expanded, 
@@ -149,6 +150,20 @@ const Sidebar = ({
               </button>
               ))}
             </nav>
+            
+            {/* Nuclia AI Query Widget */}
+            <div style={{ 
+              borderTop: '1px solid #34495e', 
+              borderBottom: '1px solid #34495e',
+              margin: '0'
+            }}>
+              <NucliaQueryWidget 
+                expanded={expanded} 
+                onResultsFound={(results) => {
+                  console.log('Nuclia search results:', results);
+                }}
+              />
+            </div>
           </div>          {/* Footer with Toggle Controls */}
           <div style={{
             marginTop: 'auto',

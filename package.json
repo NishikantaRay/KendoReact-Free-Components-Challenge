@@ -9,9 +9,12 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "setup-license": "chmod +x setup-license.sh && ./setup-license.sh",
-    "check-license": "node -e \"console.log('🔍 Checking license setup...'); const fs = require('fs'); const path = '.env'; if (fs.existsSync(path)) { const content = fs.readFileSync(path, 'utf8'); if (content.includes('your_license_key_here')) { console.log('⚠️  License key needs to be configured in .env file'); } else { console.log('✅ License key appears to be configured'); } } else { console.log('❌ .env file not found. Run: npm run setup-license'); }\""
+    "check-license": "node -e \"console.log('🔍 Checking license setup...'); const fs = require('fs'); const path = '.env'; if (fs.existsSync(path)) { const content = fs.readFileSync(path, 'utf8'); if (content.includes('your_license_key_here')) { console.log('⚠️  License key needs to be configured in .env file'); } else { console.log('✅ License key appears to be configured'); } } else { console.log('❌ .env file not found. Run: npm run setup-license'); }\"",
+    "nuclia:populate": "node scripts/populateNucliaData.js",
+    "nuclia:test": "node -e \"import('./scripts/populateNucliaData.js').then(m => m.testQueries())\""
   },
   "dependencies": {
+    "@nuclia/widget": "^1.1.1",
     "@progress/kendo-data-query": "^1.7.1",
     "@progress/kendo-react-animation": "^12.1.0",
     "@progress/kendo-react-buttons": "^12.1.0",
@@ -25,6 +28,7 @@
     "@progress/kendo-react-progressbars": "^12.1.0",
     "@progress/kendo-react-tooltip": "^12.1.0",
     "@progress/kendo-theme-default": "^12.0.1",
+    "axios": "^1.12.2",
     "chart.js": "^4.5.0",
     "react": "^19.1.1",
     "react-chartjs-2": "^5.3.0",
