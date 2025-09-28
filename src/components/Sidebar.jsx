@@ -15,7 +15,7 @@ const Sidebar = ({
   const navigate = useNavigate();
   const location = useLocation();
   const menuItems = [
-    { id: 'dashboard', icon: 'k-icon k-i-chart-line-markers', label: 'Dashboard', path: '/', emoji: '📊' },
+    { id: 'dashboard', icon: 'k-icon k-i-chart-line-markers', label: 'Dashboard', path: '/dashboard', emoji: '📊' },
     { id: 'employees', icon: 'k-icon k-i-user', label: 'Employees', path: '/employees', emoji: '👥' },
     { id: 'analytics', icon: 'k-icon k-i-chart-pie-slice', label: 'Analytics', path: '/analytics', emoji: '📈' },
     { id: 'reports', icon: 'k-icon k-i-file', label: 'Reports', path: '/reports', emoji: '📄' },
@@ -91,7 +91,7 @@ const Sidebar = ({
                   width: '100%',
                   padding: expanded ? '12px 20px' : '12px 14px',
                   border: 'none',
-                  background: location.pathname === item.path ? '#3498db' : 'transparent',
+                  background: (location.pathname === item.path || (item.id === 'dashboard' && location.pathname === '/')) ? '#3498db' : 'transparent',
                   color: '#ecf0f1',
                   cursor: 'pointer',
                   display: 'flex',
@@ -109,7 +109,7 @@ const Sidebar = ({
                   }
                 }}
                 onMouseLeave={(e) => {
-                  if (location.pathname !== item.path) {
+                  if (!(location.pathname === item.path || (item.id === 'dashboard' && location.pathname === '/'))) {
                     e.target.style.backgroundColor = 'transparent';
                   }
                 }}

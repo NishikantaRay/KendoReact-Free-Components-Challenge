@@ -31,7 +31,7 @@ function App() {
   };
 
   return (
-    <Router>
+    <Router basename="/KendoReact-Free-Components-Challenge">
       <div className={`app ${darkMode ? 'dark-mode' : ''} ${compactMode ? 'compact-mode' : ''}`}>
         <Navbar />
         
@@ -56,6 +56,19 @@ function App() {
               <Routes>
                 <Route 
                   path="/" 
+                  element={
+                    <Dashboard
+                      dateRange={dateRange}
+                      onDateRangeChange={(e) => setDateRange(e.target.value)}
+                      selectedTeam={selectedTeam}
+                      onTeamChange={(e) => setSelectedTeam(e.target.value)}
+                      selectedRole={selectedRole}
+                      onRoleChange={(e) => setSelectedRole(e.target.value)}
+                    />
+                  } 
+                />
+                <Route 
+                  path="/dashboard" 
                   element={
                     <Dashboard
                       dateRange={dateRange}
