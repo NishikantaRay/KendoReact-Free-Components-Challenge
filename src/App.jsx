@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Notification, NotificationGroup } from '@progress/kendo-react-notification';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
@@ -17,23 +16,17 @@ function App() {
   const [selectedTeam, setSelectedTeam] = useState('All Teams');
   const [selectedRole, setSelectedRole] = useState('All Roles');
   const [dateRange, setDateRange] = useState({ start: null, end: null });
-  const [notifications, setNotifications] = useState([]);
+  const [notification, setNotification] = useState(null);
 
   const handleSidebarToggle = () => {
     setSidebarExpanded(!sidebarExpanded);
   };
 
   const addNotification = (message, type = 'success') => {
-    const notification = {
-      id: Date.now(),
-      message,
-      type,
-      closable: true
-    };
-    setNotifications(prev => [...prev, notification]);
+    setNotification({ message, type });
     
     setTimeout(() => {
-      setNotifications(prev => prev.filter(n => n.id !== notification.id));
+      setNotification(null);
     }, 3000);
   };
 
@@ -95,25 +88,41 @@ function App() {
           </main>
         </div>
 
-        <NotificationGroup
-          style={{
+        {/* Custom Notification */}
+        {notification && (
+          <div style={{
             position: 'fixed',
             top: '20px',
             right: '20px',
-            zIndex: 9999
-          }}
-        >
-          {notifications.map((notification) => (
-            <Notification
-              key={notification.id}
-              type={{ style: notification.type, icon: true }}
-              closable={notification.closable}
-              onClose={() => setNotifications(prev => prev.filter(n => n.id !== notification.id))}
+            zIndex: 9999,
+            backgroundColor: notification.type === 'success' ? '#48bb78' : notification.type === 'error' ? '#e53e3e' : '#4299e1',
+            color: 'white',
+            padding: '12px 16px',
+            borderRadius: '8px',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            maxWidth: '300px'
+          }}>
+            <span>{notification.type === 'success' ? '✅' : notification.type === 'error' ? '❌' : 'ℹ️'}</span>
+            <span>{notification.message}</span>
+            <button
+              onClick={() => setNotification(null)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'white',
+                fontSize: '16px',
+                cursor: 'pointer',
+                padding: '0',
+                marginLeft: '8px'
+              }}
             >
-              {notification.message}
-            </Notification>
-          ))}
-        </NotificationGroup>
+              ×
+            </button>
+          </div>
+        )}
       </div>
     </Router>
   );
