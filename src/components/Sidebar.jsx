@@ -29,13 +29,15 @@ const Sidebar = ({
         color: 'white',
         borderRight: '1px solid #34495e',
         transition: 'width 0.3s ease',
-        zIndex: 900,
+        zIndex: 1000,
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
-        height: 'calc(100vh - 70px)', // Account for navbar height
-        position: 'sticky',
-        top: 0
+        height: '100vh',
+        position: 'fixed',
+        top: '70px', // Account for navbar height
+        left: 0,
+        bottom: 0
       }}
     >
         <div style={{ padding: '0' }}>
@@ -78,8 +80,9 @@ const Sidebar = ({
           </div>
 
           {/* Navigation Menu */}
-          <nav style={{ padding: '20px 0', flex: 1 }}>
-            {menuItems.map((item) => (
+          <div className="sidebar-scroll-content">
+            <nav style={{ padding: '20px 0', flex: 1 }}>
+              {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => navigate(item.path)}
@@ -144,10 +147,9 @@ const Sidebar = ({
                   </div>
                 )}
               </button>
-            ))}
-          </nav>
-
-          {/* Footer with Toggle Controls */}
+              ))}
+            </nav>
+          </div>          {/* Footer with Toggle Controls */}
           <div style={{
             marginTop: 'auto',
             padding: expanded ? '15px' : '10px 8px',

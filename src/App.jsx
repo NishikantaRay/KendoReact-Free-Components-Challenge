@@ -53,10 +53,10 @@ function App() {
           />
           
           <main 
-            className="main-content"
+            className={`main-content ${!sidebarExpanded ? 'sidebar-collapsed' : ''}`}
             style={{
               padding: compactMode ? '10px' : '20px',
-              backgroundColor: darkMode ? '#1a1a1a' : '#f5f5f5'
+              backgroundColor: darkMode ? '#1a1a1a' : undefined
             }}
           >
             <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
